@@ -53,7 +53,7 @@ class BooksApp extends React.Component {
           	console.log("App state.book2 UPDATED from  book.isInSearch ")
           	
     	}else {
-          	console.log("book is NOT in search page. It's in main page")
+          	console.log("book is in MAIN page")
           	
 			console.log("index in books2 for the book", index)     
 			newBooks2[index].shelf = newShelf //execute the manipulations

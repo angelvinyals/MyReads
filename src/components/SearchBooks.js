@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import {search} from '../BooksAPI'
+import * as BooksAPI from '../BooksAPI'
 import ListSearchBooks from  './ListSearchBooks'
 
 //import escapeRegexp from 'escape-string-regexp'
@@ -38,7 +38,7 @@ class SearchBooks extends React.Component {
 
     searchBooks (q,maxResults){
       	console.log('entering searchBooks//////////////////////');
-        search(q,maxResults)// calls search on import {search} from '../BooksAPI'. Why is not really using async-await patterns?. 'Search' makes a fetch..
+        BooksAPI.search(q,maxResults)// calls search on import {search} from '../BooksAPI'. Why is not really using async-await patterns?. 'Search' makes a fetch..
       	.then(data=>{
       		console.log('data response : ',data)
       		if(data.length){
@@ -77,8 +77,22 @@ class SearchBooks extends React.Component {
 	
 	handleChangeShelf(shelf,book){
       console.log('handleChangeShelf on  SearchBooks', shelf);
-      console.log("book on searchBOOKS", book)
-     this.props.onChangeShelf(shelf,book)
+      console.log("book on searchBOOKS", book)      
+      if (this.state.searchBooks){
+      	console.log('threre is books in search tag')
+        let newSearchBooks = this.state.searchBooks
+        let index = newSearchBooks.findIndex((b) => b.id===book.id)
+        console.log('book index in searchBooks', index)  
+        newSearchBooks[index].shelf = shelf //execute the manipulations
+        console.log('new Shelf', shelf)
+        console.log('.-.-.-.-.-.-.-.UPDATING BOOKAPI SEARCHBOOKS.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-')
+      	BooksAPI.update(book,shelf)//updating books API
+        console.log('.-.-.-.-.-.-.-.UPDATING searchBooks STATE.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-')
+         this.setState({searchBooks: newSearchBooks});  //set the new state
+         console.log("SEARCHBOOKS state.newSearchBooks UPDATED ") 
+      }
+      this.props.onChangeShelf(shelf,book)
+      
     }
 	
 	
