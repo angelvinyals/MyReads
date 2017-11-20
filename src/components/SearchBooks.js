@@ -40,7 +40,7 @@ class SearchBooks extends React.Component {
     .then(data=>{
     	console.log('data response : ',data)
     	if(data.length){
-   			let updatedBooks = data.map(book =>{
+        let updatedBooks = data.map(book =>{
     		  console.log('book searched :',book) 
           let index=this.props.books2.findIndex((b) => b.id===book.id)    				
         
@@ -54,13 +54,12 @@ class SearchBooks extends React.Component {
             console.log("shelf's value in books2 :",shelfForSearch )
             book.shelf=shelfForSearch
             return book
-
           }          
         })
         console.log('updatedBooks :', updatedBooks)
         console.log('calling updateBooks method *******')
-  		  this.updateBooks(updatedBooks) //call updateBooks method from this component to update this.state.searchBooks with updatedBooks' data
-		  } else if (data.error) {
+        this.updateBooks(updatedBooks) //call updateBooks method from this component to update this.state.searchBooks with updatedBooks' data
+      } else if (data.error) {
         this.updateBooks('')
       }
     }).catch(function (err){
