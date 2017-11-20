@@ -1,0 +1,127 @@
+import React from 'react'
+import { Link } from 'react-router-dom'
+import {search} from '../BooksAPI'
+import ListSearchBooks from  './ListSearchBooks'
+
+//import escapeRegexp from 'escape-string-regexp'
+//import sortBy from 'sort-by'
+/*
+The search page has a text input that may be used to find books. 
+As the value of the text input changes, the books that match that 
+query are displayed on the page, along with a control that lets you 
+add the book to your library. To keep the interface consistent, 
+you may consider re-using some of the code you used to display 
+the books on the main page.
+*/
+
+
+class SearchBooks extends React.Component {
+  	constructor(props){
+    	super(props)
+      	this.state={
+        	query: ''
+        }
+      	this.handleChangeShelf=this.handleChangeShelf.bind(this)
+    } 
+  
+  	
+
+	updateQuery(query){
+    	console.log(query);      	
+      	this.setState({query: query.trim()})
+		if (query.length){
+          	this.searchBooks(query)
+        } else {
+        	this.updateBooks('')
+        }
+    }    
+
+    searchBooks (q,maxResults){
+      	console.log('entering searchBooks//////////////////////');
+        search(q,maxResults)// calls search on import {search} from '../BooksAPI'. Why is not really using async-await patterns?. 'Search' makes a fetch..
+      	.then(data=>{
+      		console.log('data response : ',data)
+      		if(data.length){
+     			let updatedBooks = data.map(book =>{
+      				//console.log('book searched :',book)
+      				//book.isInSearch='true'; 
+                  	if(book.hasOwnProperty('shelf')){
+                      	console.log('it HAS this property book.shelf ',book.shelf)
+                    }else{
+                    	console.log('seems that has NOT  BOOK.SHELF property.....?????')                      	           	
+                      	console.log('book : ', book)
+                      	console.log('book.title : ', book.title)
+                      	console.log('book.readingModes : ', book.readingModes)
+                      	console.log('book.shelf : ', book.shelf)
+                      	console.log('typeof(book.shelf)',typeof(book.shelf))           
+                    }
+                  	//if (book.shelf !== "read"|| book.shelf !== "wantToRead" || book.shelf !== "currentlyReading" ){book.shelf="none"}
+                  	return book
+    			})
+				//console.log('updatedBooks :', updatedBooks)
+				console.log('calling updateBooks method *******')
+    			this.updateBooks(updatedBooks) //call updateBooks method from this component to update this.state.searchBooks with updatedBooks' data
+			} else if (data.error) {
+               	this.updateBooks('')
+            }
+   		}).catch(function (err){
+        	console.log('error ',err)
+        })     
+    }
+	
+	updateBooks(books){
+      console.log('entering updateBooks method......from SEARCHbooks........')
+      this.setState({searchBooks: books})
+	  //console.log('this.state.searchBooks', this.state.searchBooks)
+	}
+	
+	handleChangeShelf(shelf,book){
+      console.log('handleChangeShelf on  SearchBooks', shelf);
+      console.log("book on searchBOOKS", book)
+     this.props.onChangeShelf(shelf,book)
+    }
+	
+	
+
+	render() {      
+    	
+    	return (
+      	<div className="search-books">
+            <div className="search-books-bar">
+                <Link className="close-search" to="/">Close</Link>
+                <div className="search-books-input-wrapper">
+                    {/*
+                              NOTES: The search from BooksAPI is limited to a particular set of search terms.
+                              You can find these search terms here:
+                              https://github.com/udacity/reactnd-project-myreads-starter/blob/master/SEARCH_TERMS.md
+
+                              However, remember that the BooksAPI.search method DOES searchby title or author. 
+                              So, don't worry if you don't find a specific author or title.
+                              Every search is limited by search terms.                              
+                     */}
+          			
+                   <input 
+						type="text" 
+						placeholder="Search by title or author"	
+          				onChange={(event)=> this.updateQuery(event.target.value)}
+                        value={this.state.query}						    				
+          			/>
+                      
+                </div>
+            </div>
+            <div className="search-books-results">
+                <ol className="books-grid">
+					{console.log('updating ListBoks....on render Searchbook')}
+					{console.log(this.state.searchBooks)}
+					{this.state.searchBooks 
+                     	? (<ListSearchBooks sBooks={this.state.searchBooks} onChangeShelf={this.handleChangeShelf} />)
+						: null
+					}
+				</ol>
+            </div>
+        </div>
+    	)
+  	}
+}
+
+export default SearchBooks
