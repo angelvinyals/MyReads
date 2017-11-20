@@ -42,7 +42,7 @@ class BooksApp extends React.Component {
       	BooksAPI.update(book,newShelf)//updating books API
         console.log('.-.-.-.-.-.-.-.UPDATING books2 STATE.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-')
       	let newBooks2 = this.state.books2.slice() //copy the array in the state books2 that will be changed
-      	let index=newBooks2.findIndex((b) => b===book)
+      	let index=newBooks2.findIndex((b) => b.id===book.id)
         console.log('_____________isInBook2? index= ',index)
         if (index<0){        
       		console.log("book is NOT in books2")
