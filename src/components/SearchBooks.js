@@ -41,29 +41,31 @@ class SearchBooks extends React.Component {
     	console.log('data response : ',data)
     	if(data.length){
    			let updatedBooks = data.map(book =>{
-    		//console.log('book searched :',book)      				
-      	if(book.hasOwnProperty('shelf')){
-          console.log('it HAS this property book.shelf ',book.shelf)
-        }else{
-        	console.log('seems that has NOT  BOOK.SHELF property.....?????')                      	           	
-          console.log('book : ', book)
-          console.log('book.title : ', book.title)
-          console.log('book.readingModes : ', book.readingModes)
-          console.log('book.shelf : ', book.shelf)
-          console.log('typeof(book.shelf)',typeof(book.shelf))           
-        }
-      	//if (book.shelf !== "read"|| book.shelf !== "wantToRead" || book.shelf !== "currentlyReading" ){book.shelf="none"}
-      	return book
-  			})
-			//console.log('updatedBooks :', updatedBooks)
-			console.log('calling updateBooks method *******')
-  			this.updateBooks(updatedBooks) //call updateBooks method from this component to update this.state.searchBooks with updatedBooks' data
+    		  console.log('book searched :',book) 
+          let index=this.props.books2.findIndex((b) => b.id===book.id)    				
+        
+          if (index<0){// there is NOT in  BOOKS2
+            book.shelf="none"
+            console.log('new book.shelf assigned: ', book.shelf)
+            return book
+
+          } else{ //There is YES in BOOKS2
+            let shelfForSearch= this.props.books2[index].shelf
+            console.log("shelf's value in books2 :",shelfForSearch )
+            book.shelf=shelfForSearch
+            return book
+
+          }          
+        })
+        console.log('updatedBooks :', updatedBooks)
+        console.log('calling updateBooks method *******')
+  		  this.updateBooks(updatedBooks) //call updateBooks method from this component to update this.state.searchBooks with updatedBooks' data
 		  } else if (data.error) {
         this.updateBooks('')
       }
     }).catch(function (err){
-    console.log('error ',err)
-      })     
+      console.log('error ',err)
+    })     
   }
 	
 	updateBooks(books){
