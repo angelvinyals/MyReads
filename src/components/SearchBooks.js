@@ -108,23 +108,23 @@ class SearchBooks extends React.Component {
               So, don't worry if you don't find a specific author or title.
               Every search is limited by search terms.                              
             */}          			
-            <input 
-					    type="text" 
-					    placeholder="Search by title or author"	
-        			onChange={(event)=> this.updateQuery(event.target.value)}
-              value={this.state.query}						    				
-        		/>        
+            <input
+              type="text"
+              placeholder="Search by title or author"
+              onChange={(event)=> this.updateQuery(event.target.value)}
+              value={this.state.query}
+            />
           </div>
         </div>
         <div className="search-books-results">
           <ol className="books-grid">
-					   {console.log('updating ListBoks....on render Searchbook')}
-					   {console.log(this.state.searchBooks)}
-					   {this.state.searchBooks 
-               ? (<ListSearchBooks sBooks={this.state.searchBooks} onChangeShelf={this.handleChangeShelf} />)
-						    : null
-					   }
-				  </ol>
+            {console.log('updating ListBoks....on render Searchbook')}
+            {console.log(this.state.searchBooks)}
+            {this.state.searchBooks 
+              ? (<ListSearchBooks sBooks={this.state.searchBooks} onChangeShelf={this.handleChangeShelf} />)
+              : null
+            }
+          </ol>
         </div>
       </div>
     )
