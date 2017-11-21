@@ -12,17 +12,17 @@ class ReadSelector extends React.Component {
     // this.setState({value: e.target.value});
   }
 
-	render() {
+  render() {
     return (
-      <div className="book-shelf-changer">          		
-        <select  
+      <div className="book-shelf-changer">
+        <select 
           value={this.props.shelf}
-        	onChange={this.handleChange} 
-        >					
-					<option value="currentlyReading">Currently Reading</option>
-					<option value="wantToRead">Want to Read</option>
-					<option value="read">Read</option>
-					<option value="none" >None</option>
+          onChange={this.handleChange}
+        >
+          <option value="currentlyReading">Currently Reading</option>
+          <option value="wantToRead">Want to Read</option>
+          <option value="read">Read</option>
+          <option value="none" >None</option>
         </select> 			
       </div>
     );
