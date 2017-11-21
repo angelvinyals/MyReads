@@ -17,37 +17,37 @@ class Book extends React.Component {
     console.log("book", book)
     this.props.onChangeShelf(shelf,book)
   }
-  
-	render() {  
-  	let authors
+
+  render() {
+    let authors
     if (this.props.book.authors){
-    	authors= <div className="book-authors">{this.props.book.authors.map((a,i,arr) => <p key={this.props.book.id+i} className="book-authors-list">{a}</p>)}</div>;
+      authors= <div className="book-authors">{this.props.book.authors.map((a,i,arr) => <p key={this.props.book.id+i} className="book-authors-list">{a}</p>)}</div>;
     } else {
-   		authors= <div className="book-authors"><p key={this.props.book.id} className="book-authors-list">{"anonymous"}</p></div>;
+      authors= <div className="book-authors"><p key={this.props.book.id} className="book-authors-list">{"anonymous"}</p></div>;
     }
-  	let smallThumbnail
+    let smallThumbnail
     if (this.props.book.imageLinks.smallThumbnail){
       smallThumbnail = this.props.book.imageLinks.smallThumbnail
     } else {
-    	smallThumbnail = 'none'
+      smallThumbnail = 'none'
     }
-  
-  	return (
-  		<div className="book">
-        <div className="book-top">      			
-          <div className="book-cover" 
-      			style={{ width: 128, height: 193, backgroundImage: `url(${smallThumbnail})` }}>
-		      </div>
+
+    return (
+      <div className="book">
+        <div className="book-top">
+          <div className="book-cover"
+            style={{ width: 128, height: 193, backgroundImage: `url(${smallThumbnail})` }}>
+          </div>
           <ReadSelector 
             onChangeShelf={this.handleChangeShelf} 
-            shelf={this.props.shelf} 
+            shelf={this.props.shelf}
           />
         </div>
         <div className="book-title">
           {this.props.book.title}
         </div>
-		    {authors}            
-      </div>	       
+        {authors}
+      </div>
     )
   }
 }
