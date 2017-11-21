@@ -38,8 +38,8 @@ class SearchBooks extends React.Component {
     console.log('entering searchBooks//////////////////////');
     BooksAPI.search(q,maxResults)// calls search on import {search} from '../BooksAPI'. Why is not really using async-await patterns?. 'Search' makes a fetch..
     .then(data=>{
-    	console.log('data response : ',data)
-    	if(data.length){
+      console.log('data response : ',data)
+      if(data.length){
         let updatedBooks = data.map(book =>{
     		  console.log('book searched :',book) 
           let index=this.props.books2.findIndex((b) => b.id===book.id)    				
@@ -62,37 +62,38 @@ class SearchBooks extends React.Component {
       } else if (data.error) {
         this.updateBooks('')
       }
-    }).catch(function (err){
+    }
+    ).catch(function (err){
       console.log('error ',err)
     })     
   }
-	
-	updateBooks(books){
+
+  updateBooks(books){
     console.log('entering updateBooks method......from SEARCHbooks........')
     this.setState({searchBooks: books})
-	  //console.log('this.state.searchBooks', this.state.searchBooks)
-	}
-	
-	handleChangeShelf(shelf,book){
-    console.log('handleChangeShelf on  SearchBooks', shelf);
-    console.log("book on searchBOOKS", book)      
+    //console.log('this.state.searchBooks', this.state.searchBooks)
+  }
+
+  handleChangeShelf(shelf,book){
+    console.log('handleChangeShelf on  SearchBooks', shelf)
+    console.log("book on searchBOOKS", book)
     if (this.state.searchBooks){
-    	console.log('threre is books in search tag')
+      console.log('threre is books in search tag')
       let newSearchBooks = this.state.searchBooks
       let index = newSearchBooks.findIndex((b) => b.id===book.id)
       console.log('book index in searchBooks', index)  
       newSearchBooks[index].shelf = shelf //execute the manipulations
       console.log('new Shelf', shelf)
       console.log('.-.-.-.-.-.-.-.UPDATING BOOKAPI SEARCHBOOKS.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-')
-    	BooksAPI.update(book,shelf)//updating books API
+      BooksAPI.update(book,shelf)//updating books API
       console.log('.-.-.-.-.-.-.-.UPDATING searchBooks STATE.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-')
       this.setState({searchBooks: newSearchBooks});  //set the new state
       console.log("SEARCHBOOKS state.newSearchBooks UPDATED ") 
     }
     this.props.onChangeShelf(shelf,book)    
-  }	
+  }
 
-	render() {      
+  render() {      
     return (
       <div className="search-books">
         <div className="search-books-bar">
