@@ -13,46 +13,46 @@ class ListBooks extends React.Component {
     console.log("book on LISTBOOKS", book)
     this.props.onChangeShelf(shelf,book)
   }
-    
-	render() {  
-    return (			
+
+  render() {
+    return (
       <div className="list-books-content">
         <div>
           <div className="bookshelf">
-        		<Title  styleClass='bookshelf-title' tag='h2' title='currentlyReading'/>
-            <div className="bookshelf-books">          					
-        			<ol className="books-grid">         						
-        				{this.props.books2
-                  .filter((book) => book.shelf==="currentlyReading")
-                  .map((b) =>   							
-                    <li key={b.id}>
-          						<Book 
-                        book={b} 
-                        onChangeShelf={this.handleChangeShelf} 
-                        shelf={b.shelf}
-                      />
-          					</li>   
-          				)
-                }      				       						                        		
-              </ol>
-            </div>
-          </div>     
-          <div className="bookshelf">
-            <Title  styleClass='bookshelf-title' tag='h2' title='Want to Read'/>
+            <Title  styleClass='bookshelf-title' tag='h2' title='currentlyReading'/>
             <div className="bookshelf-books">
               <ol className="books-grid">
-		            {this.props.books2
-                  .filter((book) => book.shelf==="wantToRead")
-                  .map((b) =>            								        														
+                {this.props.books2
+                  .filter((book) => book.shelf==="currentlyReading")
+                  .map((b) =>
                     <li key={b.id}>
-								      <Book 
-                        book={b} 
-                        onChangeShelf={this.handleChangeShelf} 
-                        shelf={b.shelf} 
+                      <Book 
+                        book={b}
+                        onChangeShelf={this.handleChangeShelf}
+                        shelf={b.shelf}
                       />
-						        </li>  
+                    </li>
                   )
-                }                         
+                }
+              </ol>
+            </div>
+          </div>
+          <div className="bookshelf">
+          <Title  styleClass='bookshelf-title' tag='h2' title='Want to Read'/>
+            <div className="bookshelf-books">
+              <ol className="books-grid">
+                {this.props.books2
+                  .filter((book) => book.shelf==="wantToRead")
+                  .map((b) =>
+                    <li key={b.id}>
+                      <Book
+                        book={b}
+                        onChangeShelf={this.handleChangeShelf}
+                        shelf={b.shelf}
+                      />
+                    </li>
+                  )
+                }
               </ol>
             </div>
           </div>
@@ -60,22 +60,23 @@ class ListBooks extends React.Component {
             <Title  styleClass='bookshelf-title' tag='h2' title='Read'/>
             <div className="bookshelf-books">
               <ol className="books-grid">
-		            {this.props.books2
+                {this.props.books2
                   .filter((book) => book.shelf==="read")
-                  .map((b) =>            								        						
-                   	<li key={b.id}>
-								      <Book 
-                        book={b} 
-                        onChangeShelf={this.handleChangeShelf} 
-                        shelf={b.shelf} />
-						        </li>  
+                  .map((b) =>
+                    <li key={b.id}>
+                      <Book
+                        book={b}
+                        onChangeShelf={this.handleChangeShelf}
+                        shelf={b.shelf} 
+                      />
+                    </li>
                   )
-                }                                                     
+                }
               </ol>
             </div>
           </div>
         </div>
-      </div> 
+      </div>
     )
   }
 }
