@@ -7,14 +7,11 @@ class Book extends React.Component {
   } 
   
   BookSelected(value){
-    console.log('1')
     this.props.moveTo(value)
   }
   
   handleChangeShelf(shelf){      
-    console.log('handleChangeShelf on  book', shelf);
     let book= this.props.book
-    console.log("book", book)
     this.props.onChangeShelf(shelf,book)
   }
 

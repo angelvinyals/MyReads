@@ -7,9 +7,7 @@ class ReadSelector extends React.Component {
   } 
 
   handleChange(e) {
-    console.log('handleChangeShelf on ReadSelector', e.target.value);
     this.props.onChangeShelf(e.target.value);
-    // this.setState({value: e.target.value});
   }
 
   render() {

@@ -8,8 +8,6 @@ class ListSearchBooks extends React.Component {
   }  
   	 
   handleChangeShelf(shelf,book){
-    console.log('handleChangeShelf on  ListSEARCHBooks', shelf);
-    console.log("book on LISTsearchBOOKS", book)
     this.props.onChangeShelf(shelf,book)
   }
 
@@ -19,9 +17,8 @@ class ListSearchBooks extends React.Component {
         <div className="bookshelf">
           <div className="bookshelf-books">
             <ol className="books-grid">
-              {this.props.sBooks.map((b) =>   /*without filter all kind of shelf will be rendered */
+              {this.props.sBooks.map((b) =>   
                 <li key={b.id}>
-                  {/*console.log('b',b)*/}
                   <Book book={b} onChangeShelf={this.handleChangeShelf} shelf={b.shelf} />
                 </li>
                 )

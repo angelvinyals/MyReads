@@ -9,8 +9,6 @@ class ListBooks extends React.Component {
   }  
   	 
   handleChangeShelf(shelf,book){
-    console.log('handleChangeShelf on  ListBooks', shelf);
-    console.log("book on LISTBOOKS", book)
     this.props.onChangeShelf(shelf,book)
   }
 
