@@ -1,6 +1,6 @@
 import React from 'react'
-import Title from './Title'
-import Book from './Book'
+import Title from './Title.jsx'
+import Book from './Book.jsx'
 
 class ListBooks extends React.Component {
   constructor(props){

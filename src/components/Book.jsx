@@ -1,5 +1,5 @@
 import React from 'react'
-import ReadSelector from './ReadSelector'
+import ReadSelector from './ReadSelector.jsx'
 class Book extends React.Component {  
   constructor(props) {
     super(props);    	      
