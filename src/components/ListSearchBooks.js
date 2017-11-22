@@ -1,4 +1,5 @@
 import React from 'react'
+import Shelf from './Shelf/Shelf.jsx'
 import Book from './Book'
 
 class ListSearchBooks extends React.Component {
@@ -15,23 +16,27 @@ class ListSearchBooks extends React.Component {
 
   render() {
     return (
+      
       <div className="list-books-content">
         <div className="bookshelf">
           <div className="bookshelf-books">
             <ol className="books-grid">
-              {this.props.sBooks.map((b) =>   /*without filter all kind of shelf will be rendered */
-                <li key={b.id}>
-                  {/*console.log('b',b)*/}
-                  <Book book={b} onChangeShelf={this.handleChangeShelf} shelf={b.shelf} />
+              {this.props.sBooks.map((b) =>   
+                <li key={b.id}>                  
+                  <Book 
+                    book={b} 
+                    onChangeShelf={this.handleChangeShelf} 
+                    shelf={b.shelf} />
                 </li>
                 )
               }
             </ol>
           </div>
-        </div>
+        </div>        
       </div>
     )
   }
 }
 
 export default ListSearchBooks
+

@@ -1,6 +1,8 @@
 import React from 'react'
 import Title from './Title'
+import Shelf from './Shelf/Shelf.jsx'
 import Book from './Book'
+
 
 class ListBooks extends React.Component {
   constructor(props){
@@ -18,63 +20,24 @@ class ListBooks extends React.Component {
     return (
       <div className="list-books-content">
         <div>
-          <div className="bookshelf">
-            <Title  styleClass='bookshelf-title' tag='h2' title='currentlyReading'/>
-            <div className="bookshelf-books">
-              <ol className="books-grid">
-                {this.props.books2
-                  .filter((book) => book.shelf==="currentlyReading")
-                  .map((b) =>
-                    <li key={b.id}>
-                      <Book 
-                        book={b}
-                        onChangeShelf={this.handleChangeShelf}
-                        shelf={b.shelf}
-                      />
-                    </li>
-                  )
-                }
-              </ol>
-            </div>
-          </div>
-          <div className="bookshelf">
-          <Title  styleClass='bookshelf-title' tag='h2' title='Want to Read'/>
-            <div className="bookshelf-books">
-              <ol className="books-grid">
-                {this.props.books2
-                  .filter((book) => book.shelf==="wantToRead")
-                  .map((b) =>
-                    <li key={b.id}>
-                      <Book
-                        book={b}
-                        onChangeShelf={this.handleChangeShelf}
-                        shelf={b.shelf}
-                      />
-                    </li>
-                  )
-                }
-              </ol>
-            </div>
-          </div>
-          <div className="bookshelf">
-            <Title  styleClass='bookshelf-title' tag='h2' title='Read'/>
-            <div className="bookshelf-books">
-              <ol className="books-grid">
-                {this.props.books2
-                  .filter((book) => book.shelf==="read")
-                  .map((b) =>
-                    <li key={b.id}>
-                      <Book
-                        book={b}
-                        onChangeShelf={this.handleChangeShelf}
-                        shelf={b.shelf} 
-                      />
-                    </li>
-                  )
-                }
-              </ol>
-            </div>
-          </div>
+          <Shelf
+            title="Currently Reading"  
+            shelf="currentlyReading"
+            books={this.props.books2}
+            onChangeShelf={this.handleChangeShelf}
+          />
+          <Shelf 
+            title="Want to Read" 
+            shelf="wantToRead"
+            books={this.props.books2}
+            onChangeShelf={this.handleChangeShelf}
+          />
+          <Shelf 
+            title="Read" 
+            shelf="read"
+            books={this.props.books2}
+            onChangeShelf={this.handleChangeShelf}
+          />
         </div>
       </div>
     )
