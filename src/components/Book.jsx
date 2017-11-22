@@ -23,10 +23,10 @@ class Book extends React.Component {
       authors= <div className="book-authors"><p key={this.props.book.id} className="book-authors-list">{"anonymous"}</p></div>;
     }
     let smallThumbnail
-    if (this.props.book.imageLinks.smallThumbnail){
+    if (this.props.book.imageLinks){
       smallThumbnail = this.props.book.imageLinks.smallThumbnail
     } else {
-      smallThumbnail = 'none'
+      smallThumbnail = 'http://via.placeholder.com/128x193/250/ffffff?text=No%20Cover'
     }
 
     return (
