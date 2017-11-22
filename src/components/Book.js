@@ -29,7 +29,7 @@ class Book extends React.Component {
     if (this.props.book.imageLinks){
       smallThumbnail = this.props.book.imageLinks.smallThumbnail
     } else {
-      smallThumbnail = 'none'
+      smallThumbnail = 'http://via.placeholder.com/128x193/250/ffffff?text=No%20Cover'
     }
 
     return (
